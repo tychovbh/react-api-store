@@ -1,0 +1,18 @@
+const qs = require('qs')
+
+export const query = (filters) => {
+    return filters && JSON.stringify(filters) !== '{}' ? '?' + qs.stringify(filters) : ''
+}
+
+export const request = (type, route, filters = {}) => {
+    let params = Object.assign({}, filters) || {}
+    for (let key in params) {
+        if (!params.hasOwnProperty(key) || route.indexOf(`{${key}}`) === -1) {
+            continue;
+        }
+        route = route.replace(`{${key}}`, params[key])
+        delete params[key]
+    }
+
+    return type === 'get' ? route + query(params) : route
+}
