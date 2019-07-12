@@ -1,6 +1,6 @@
 {
-  "short_name": "react-api-store",
-  "name": "react-api-store",
+  "short_name": "react-hook-api-store",
+  "name": "react-hook-api-store",
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",

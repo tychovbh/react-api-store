@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import Router, {ApiProvider, useApiStore} from 'react-api-store'
+import Router, {ApiStoreProvider, useApiStore} from 'react-hook-api-store'
 
 Router.baseUrl('https://jsonplaceholder.typicode.com')
 Router.index('/todos', 'todos')
@@ -39,6 +39,6 @@ const Todos = () => {
     )
 }
 
-export default () => <ApiProvider Router={Router}>
+export default () => <ApiStoreProvider Router={Router}>
     <Todos/>
-</ApiProvider>
+</ApiStoreProvider>

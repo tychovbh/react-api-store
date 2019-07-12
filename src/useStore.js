@@ -30,8 +30,7 @@ const getStateFromRoutes = (state, type, single) => {
     return state
 }
 
-export const StoreProvider = ({children, Router}) => {
-    console.log('updating')
+export const ApiStoreProvider = ({children, Router}) => {
     ProjectRouter = Router
     let initialState = getStateFromRoutes({}, 'get')
     initialState = getStateFromRoutes(initialState, 'show', true)
@@ -81,7 +80,7 @@ function wrapperDispatch(dispatch, state) {
     }
 }
 
-export const useStore = store => {
+export const useApiStore = store => {
     const {state, dispatch} = useContext(StoreContext)
     return {state, dispatch: wrapperDispatch(dispatch, state)}
 }

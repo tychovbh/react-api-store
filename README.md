@@ -1,13 +1,13 @@
-# react-api-store
+# react-hook-api-store
 
 > React store that is linked with a REST API via Hooks
 
-[![NPM](https://img.shields.io/npm/v/react-api-store.svg)](https://www.npmjs.com/package/react-api-store) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-hook-api-store.svg)](https://www.npmjs.com/package/react-hook-api-store) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save react-api-store
+npm install --save react-hook-api-store
 ```
 
 ## Usage
