@@ -1,6 +1,6 @@
-async function post(request, params) {
+async function put(request, params) {
     const res = await fetch(request, {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(params),
         headers: {
             'Content-type': 'application/json; charset=UTF-8'
@@ -11,5 +11,5 @@ async function post(request, params) {
 }
 
 export default {
-    post: post
+    put: put
 }

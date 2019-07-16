@@ -6793,6 +6793,11 @@ js-base64@^2.1.9:
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.1.tgz#1efa39ef2c5f7980bb1784ade4a8af2de3291121"
   integrity sha512-M7kLczedRMYX4L8Mdh4MzyAMM9O5osx+4FcOQuTvr3A9F2D9S5JXheN0ewNbrvK2UatkTRhL5ejGmGSjNMiZuw==
 
+js-expansion@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/js-expansion/-/js-expansion-1.0.0.tgz#4cc6125259fee8c1feaf967eeeaf2f7774e7ef6a"
+  integrity sha512-dZeKWmuUyinHDnVCGzpZKW85Atb6L0tTagC3czQ7LQsVdxQ1ap3uNzmgYBas+SxjMbpDaWXUg6ORkZMbK1FhiQ==
+
 js-levenshtein@^1.1.3:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/js-levenshtein/-/js-levenshtein-1.1.6.tgz#c6cee58eb3550372df8deb85fad5ce66ce01d59d"

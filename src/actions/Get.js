@@ -1,9 +1,9 @@
-const get = async (request) => {
+async function get(request) {
     const res = await fetch(request)
     return await res.json()
 }
 
-export const getActions = {
+export default {
     get: get,
     show: get,
     index: get,
