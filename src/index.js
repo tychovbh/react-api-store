@@ -87,7 +87,7 @@ class createStore {
 
     dispatch(action) {
         const method = this.actions[action.method]
-        const data = method(this.router.request(action.method, action.route, action.params))
+        const data = method(this.router.request(action.method, action.route, action.params), action.params)
         this.data[action.route] = data
         return data
     }

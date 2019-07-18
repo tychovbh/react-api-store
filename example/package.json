@@ -6,8 +6,8 @@
   "private": true,
   "dependencies": {
     "prop-types": "^15.6.2",
-    "react": "link:../node_modules/react",
     "react-hook-api-store": "link:..",
+    "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-scripts": "^3.0.1"
   },

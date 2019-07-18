@@ -56,17 +56,14 @@ export function ApiStoreProvider ({children, store}) {
 
 function appendData (action, route, response, state) {
     const append = action.append || 'data'
-    let data = state[action.route][append].clone()
-    if (action.method === 'post') {
-        response = [route.wrap ? response : response[append]]
-    }
-    if (action.method === 'put') {
-        data = data.save(route.wrap ? response : response[append])
-        return route.wrap ? data : {...response, [append]: data}
-    }
-    data = route.wrap ? data.concat(response) : {...response, [append]: data.concat(response[append])}
+    let index = state[action.route][append].clone()
 
-    return data
+    if (action.method === 'put' || action.method === 'post') {
+        index = index.save(route.wrap ? response : response[append])
+        return route.wrap ? index : {...response, [append]: index}
+    }
+
+    return route.wrap ? index.concat(response) : {...response, [append]: index.concat(response[append])}
 }
 
 function deleteData (action, route, state) {
@@ -89,10 +86,6 @@ function wrapperDispatch(dispatch, state) {
         })
 
         globalStore.dispatch(action).then((response) => {
-            if (Array.isArray(response)) {
-                response = response.splice(1, 5)
-            }
-
             if (action.type === 'append' || action.method === 'post' || action.method === 'put') {
                 response = appendData(action, route, response, state)
             }
