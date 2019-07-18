@@ -2,13 +2,13 @@ import React, {createContext, useReducer, useContext} from 'react'
 import 'js-expansion'
 
 const StoreContext = createContext({})
-const reducer = (state, action) => {
+function reducer(state, action) {
     return {...state, ...action.update}
 }
 
 let globalStore = {}
 
-const getStateFromRoutes = (state, type, single) => {
+function getStateFromRoutes  (state, type, single) {
     const routes = globalStore.router.routes[type]
 
     for (let name in routes) {
@@ -39,7 +39,7 @@ const getStateFromRoutes = (state, type, single) => {
     return state
 }
 
-export const ApiStoreProvider = ({children, store}) => {
+export function ApiStoreProvider ({children, store}) {
     globalStore = store
     let initialState = getStateFromRoutes({}, 'get')
     initialState = getStateFromRoutes(initialState, 'show', true)
@@ -54,7 +54,7 @@ export const ApiStoreProvider = ({children, store}) => {
     )
 }
 
-const appendData = (action, route, response, state) => {
+function appendData (action, route, response, state) {
     const append = action.append || 'data'
     let data = state[action.route][append].clone()
     if (action.method === 'post') {
@@ -69,7 +69,7 @@ const appendData = (action, route, response, state) => {
     return data
 }
 
-const deleteData = (action, route, state) => {
+function deleteData (action, route, state) {
     const append = action.append || 'data'
     const keys = Object.keys(action.params)
     let data = state[action.route][append].clone()
@@ -117,7 +117,7 @@ function wrapperDispatch(dispatch, state) {
     }
 }
 
-export const withApiStore = (store) => {
+export function withApiStore (store) {
     return (Component) => {
         const ApiStoreMiddleware = (props) => {
             return <Component {...props}/>
@@ -138,7 +138,7 @@ export const withApiStore = (store) => {
 }
 
 
-export const useApiStore = store => {
+export function useApiStore () {
     const {state, dispatch} = useContext(StoreContext)
     return {state, dispatch: wrapperDispatch(dispatch, state)}
 }

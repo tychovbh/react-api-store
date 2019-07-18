@@ -22,6 +22,12 @@ export default {
       sourcemap: true
     }
   ],
+  loaders: [
+    {test: /\.json$/, loader: 'json-loader'}
+  ],
+  external: [
+    'node-fetch'
+  ],
   plugins: [
     external(),
     postcss({
