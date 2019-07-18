@@ -1,3 +1,5 @@
+import 'isomorphic-unfetch'
+
 async function post(request, params) {
     const res = await fetch(request, {
         method: 'POST',

@@ -94,4 +94,5 @@ class createStore {
 }
 
 const store = new createStore()
+
 export default store

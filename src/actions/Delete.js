@@ -1,3 +1,5 @@
+import 'isomorphic-unfetch'
+
 async function deleteRequest(request) {
     const res = await fetch(request, {
         method: 'DELETE'

@@ -117,6 +117,27 @@ function wrapperDispatch(dispatch, state) {
     }
 }
 
+export const withApiStore = (store) => {
+    return (Component) => {
+        const ApiStoreMiddleware = (props) => {
+            return <Component {...props}/>
+        }
+
+        ApiStoreMiddleware.getInitialProps = async ({Component, ctx}) => {
+            let pageProps = {}
+            if (Component.getInitialProps) {
+                ctx.store = store
+                pageProps = await Component.getInitialProps(ctx)
+            }
+
+            return {pageProps, store}
+        }
+
+        return ApiStoreMiddleware
+    }
+}
+
+
 export const useApiStore = store => {
     const {state, dispatch} = useContext(StoreContext)
     return {state, dispatch: wrapperDispatch(dispatch, state)}

@@ -1,3 +1,5 @@
+import 'isomorphic-unfetch'
+
 async function put(request, params) {
     const res = await fetch(request, {
         method: 'PUT',

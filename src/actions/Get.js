@@ -1,3 +1,5 @@
+import 'isomorphic-unfetch'
+
 async function get(request) {
     const res = await fetch(request)
     return await res.json()

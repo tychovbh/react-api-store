@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import creatStore, {ApiStoreProvider, useApiStore} from 'react-hook-api-store'
+import store, {ApiStoreProvider, useApiStore} from 'react-hook-api-store'
 
-creatStore.router.baseUrl('https://jsonplaceholder.typicode.com')
-creatStore.router.index('/todos', 'todos', true)
-creatStore.router.show('/todos/{id}', 'todo', true)
-creatStore.router.post('/todos', 'todos', true)
-creatStore.router.put('/todos/{id}', 'todos', true)
-creatStore.router.delete('/todos/{id}', 'todos', true)
+store.router.baseUrl('https://jsonplaceholder.typicode.com')
+store.router.index('/todos', 'todos', true)
+store.router.show('/todos/{id}', 'todo', true)
+store.router.post('/todos', 'todos', true)
+store.router.put('/todos/{id}', 'todos', true)
+store.router.delete('/todos/{id}', 'todos', true)
 
 const Todos = () => {
     const {state, dispatch} = useApiStore()
@@ -110,6 +110,6 @@ const Todos = () => {
     )
 }
 
-export default () => <ApiStoreProvider store={creatStore}>
+export default () => <ApiStoreProvider store={store}>
     <Todos/>
 </ApiStoreProvider>
