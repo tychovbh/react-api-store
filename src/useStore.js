@@ -1,5 +1,6 @@
 import React, {createContext, useReducer, useContext} from 'react'
 import 'js-expansion'
+import createStore from './createStore'
 
 const StoreContext = createContext({})
 function reducer(state, action) {
@@ -58,6 +59,10 @@ function appendData (action, route, response, state) {
     const append = action.append || 'data'
     let index = state[action.route][append].clone()
 
+    if (!response.hasOwnProperty(append)) {
+        return {...response}
+    }
+
     if (action.method === 'put' || action.method === 'post') {
         index = index.save(route.wrap ? response : response[append])
         return route.wrap ? index : {...response, [append]: index}
@@ -77,6 +82,8 @@ function deleteData (action, route, state) {
 
 function wrapperDispatch(dispatch, state) {
     return function (action) {
+        // Rebuild store because we lose the instance going from server to client
+        globalStore = new createStore(globalStore)
         const route = globalStore.router.route(action.method, action.route)
 
         dispatch({
