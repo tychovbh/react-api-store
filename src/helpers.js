@@ -8,11 +8,23 @@ export const request = (type, route, filters = {}) => {
     let params = Object.assign({}, filters) || {}
     for (let key in params) {
         if (!params.hasOwnProperty(key) || route.indexOf(`{${key}}`) === -1) {
-            continue;
+            continue
         }
         route = route.replace(`{${key}}`, params[key])
         delete params[key]
     }
 
     return type === 'get' ? route + query(params) : route
+}
+
+export const form = (params) => {
+    let formData = new FormData()
+
+    for (let i in params) {
+        if (params.hasOwnProperty(i)) {
+            formData.append(i, params[i])
+        }
+    }
+
+    return formData
 }

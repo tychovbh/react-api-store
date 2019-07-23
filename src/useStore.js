@@ -13,8 +13,11 @@ function getStateFromRoutes  (state, type, single) {
     const routes = globalStore.router.routes[type]
 
     for (let name in routes) {
-        let data = single ? {data: {}} : {data: []}
+        if (!routes.hasOwnProperty(name)) {
+            continue
+        }
 
+        let data = single ? {} : []
         if (globalStore.data.hasOwnProperty(name)) {
             data = globalStore.data[name]
         }
@@ -24,7 +27,7 @@ function getStateFromRoutes  (state, type, single) {
         }
 
         state[name] = routes[name].wrap ? {
-            ...data,
+            data: data,
             errors: [],
             loading: false,
             updated: false
@@ -59,11 +62,11 @@ function appendData (action, route, response, state) {
     const append = action.append || 'data'
     let index = state[action.route][append].clone()
 
-    if (!response.hasOwnProperty(append)) {
+    if (!route.wrap  && !response.hasOwnProperty(append)) {
         return {...response}
     }
 
-    if (action.method === 'put' || action.method === 'post') {
+    if (action.method === 'put') {
         index = index.save(route.wrap ? response : response[append])
         return route.wrap ? index : {...response, [append]: index}
     }

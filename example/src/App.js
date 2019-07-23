@@ -10,7 +10,11 @@ store.router.delete('/todos/{id}', 'todos', true)
 
 const Todos = () => {
     const {state, dispatch} = useApiStore()
-    const [todo, setTodo] = useState({title: '', completed: false, userId: 1})
+    const [todo, setTodo] = useState({
+        title: '',
+        completed: false,
+        userId: 1
+    })
 
     useEffect(() => {
         dispatch({

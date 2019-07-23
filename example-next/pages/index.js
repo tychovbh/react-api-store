@@ -1,12 +1,10 @@
 import React, {useState} from 'react'
 import {useApiStore} from 'react-hook-api-store'
 
-
 const Todos = () => {
     const {state, dispatch} = useApiStore()
     const [todo, setTodo] = useState({title: '', completed: false, userId: 1})
 
-    return (<p>halo</p>)
     return (
       <div>
           <p><strong>Todo with ID 1: {state.todo.data.title}</strong></p>

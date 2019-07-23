@@ -1,12 +1,10 @@
 import 'isomorphic-unfetch'
+import {form} from '../helpers'
 
 async function put(request, params) {
     const res = await fetch(request, {
         method: 'PUT',
-        body: JSON.stringify(params),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        }
+        body: form(params),
     })
 
     return await res.json()
