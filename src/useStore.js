@@ -29,7 +29,7 @@ function getStateFromRoutes  (state, type, single) {
         }
 
         state[name] = route.wrap ? {
-            data: data,
+            ...data,
             errors: [],
             loading: false,
             updated: false
