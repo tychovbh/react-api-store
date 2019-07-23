@@ -17,16 +17,18 @@ function getStateFromRoutes  (state, type, single) {
             continue
         }
 
-        let data = single ? {} : []
+        const route = routes[name]
+
+        let data = single ? {data: {}} : {data: []}
         if (globalStore.data.hasOwnProperty(name)) {
-            data = globalStore.data[name]
+            data = route.wrap ? {data: globalStore.data[name]} : globalStore.data[name]
         }
 
         if (!routes.hasOwnProperty(name)) {
             continue
         }
 
-        state[name] = routes[name].wrap ? {
+        state[name] = route.wrap ? {
             data: data,
             errors: [],
             loading: false,
