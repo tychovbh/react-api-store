@@ -7,6 +7,7 @@ import deleteActions from './actions/Delete'
 export default class createStore {
     constructor(store = {}) {
         this.data = store.data || {}
+        this.initialState = store.initialState || {}
         this.router = new Router(store.router || {})
         this.actions = {
             ...getActions,
@@ -19,7 +20,12 @@ export default class createStore {
     async dispatch(action) {
         const method = this.actions[action.method]
         const data = await method(this.router.request(action.method, action.route, action.params), action.params, action.headers)
+
         this.data[action.route] = data
         return data
+    }
+
+    setState(key, value) {
+        this.initialState[key] = value
     }
 }

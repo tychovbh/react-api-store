@@ -1,8 +1,9 @@
 import 'isomorphic-unfetch'
 
-async function deleteRequest(request) {
+async function deleteRequest(request, params = {}, headers = {}) {
     const res = await fetch(request, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: headers
     })
 
     return await res.json()

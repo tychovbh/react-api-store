@@ -17,6 +17,7 @@ export const request = (type, route, filters = {}) => {
     return type === 'get' ? route + query(params) : route
 }
 
+// TODO JSON stringify arrays JSON.stringify(params[i]   )
 export const form = (params) => {
     let formData = new FormData()
 

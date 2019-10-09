@@ -21,10 +21,10 @@ export default class Router {
         return url.indexOf('http') === -1 ? this.base_url + url : url
     }
 
-    setRoute(type, url, name, wrap = false) {
+    setRoute(type, url, name, options = {}) {
         this.routes[type][name] = {
             url: this.fullUrl(url),
-            wrap: wrap
+            options: options
         }
     }
 
@@ -32,28 +32,28 @@ export default class Router {
         return this.routes[method][name]
     }
 
-    get(url, name, wrap = false) {
-        this.setRoute('get', url, name, wrap)
+    get(url, name, options = {}) {
+        this.setRoute('get', url, name, options)
     }
 
-    index(url, name, wrap = false) {
-        this.setRoute('index', url, name, wrap)
+    index(url, name, options = {}) {
+        this.setRoute('index', url, name, options)
     }
 
-    show(url, name, wrap = false) {
-        this.setRoute('show', url, name, wrap)
+    show(url, name, options = {}) {
+        this.setRoute('show', url, name, options)
     }
 
-    post(url, name, wrap = false) {
-        this.setRoute('post', url, name, wrap)
+    post(url, name, options = {}) {
+        this.setRoute('post', url, name, options)
     }
 
-    put(url, name, wrap = false) {
-        this.setRoute('put', url, name, wrap)
+    put(url, name, options = {}) {
+        this.setRoute('put', url, name, options)
     }
 
-    delete(url, name, wrap = false) {
-        this.setRoute('delete', url, name, wrap)
+    delete(url, name, options = {}) {
+        this.setRoute('delete', url, name, options)
     }
 
     request(method, route, params = {}) {

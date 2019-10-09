@@ -3,13 +3,12 @@ import Head from 'next/head'
 import React from 'react'
 import store, {withApiStore, ApiStoreProvider} from 'react-hook-api-store'
 
-
 store.router.baseUrl('https://jsonplaceholder.typicode.com')
-store.router.index('/todos', 'todos', true)
-store.router.show('/todos/{id}', 'todo', true)
-store.router.post('/todos', 'todos', true)
-store.router.put('/todos/{id}', 'todos', true)
-store.router.delete('/todos/{id}', 'todos', true)
+store.router.index('/todos', 'todos', {wrap: true})
+store.router.show('/todos/{id}', 'todo', {wrap: true})
+store.router.post('/todos', 'todos', {wrap: true})
+store.router.put('/todos/{id}', 'todos', {wrap: true})
+store.router.delete('/todos/{id}', 'todos', {wrap: true})
 
 class MyApp extends App {
     render() {

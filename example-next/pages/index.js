@@ -7,6 +7,17 @@ const Todos = () => {
 
     return (
       <div>
+          <p><strong>User with ID 1: {state.user.id} Name: {state.user.name || 'unknown'}</strong></p>
+          <button onClick={() => {
+                dispatch({
+                    method: 'setState',
+                    name: 'user',
+                    value: {...state.user, name: 'Piet'}
+                })
+          }}>
+              name user Piet
+          </button>
+
           <p><strong>Todo with ID 1: {state.todo.data.title}</strong></p>
           <p>Loading todo: {state.todo.loading ? 'true ' : 'false'}</p>
 
@@ -16,7 +27,7 @@ const Todos = () => {
               dispatch({
                   method: todo.id ? 'put' : 'post',
                   route: 'todos',
-                  params: todo
+                  params: todo,
               })
           }}>
               <div>
@@ -102,7 +113,13 @@ Todos.getInitialProps = async ({store}) => {
             id: 1
         }
     })
-    return {todos, todo}
+
+    const user = {
+        id: 1
+    }
+
+    store.setState('user', user)
+    return {todos, todo, user}
 }
 
 export default Todos

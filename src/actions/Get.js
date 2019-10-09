@@ -1,7 +1,9 @@
 import 'isomorphic-unfetch'
 
-async function get(request) {
-    const res = await fetch(request)
+async function get(request, params = {}, headers = {}) {
+    const res = await fetch(request, {
+        headers: headers
+    })
     return await res.json()
 }
 
