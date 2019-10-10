@@ -153,6 +153,7 @@ export function withApiStore(store) {
         }
 
         ApiStoreMiddleware.getInitialProps = async ({Component, ctx}) => {
+            store = globalStore && globalStore.data ? new createStore(globalStore) : store
             let pageProps = {}
             if (Component.getInitialProps) {
                 ctx.store = store
