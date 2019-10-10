@@ -117,7 +117,7 @@ function wrapperDispatch(dispatch, state) {
             }
         })
 
-        return globalStore.dispatch(action).then((response) => {
+        globalStore.dispatch(action).then((response) => {
             if (action.type === 'append' || action.method === 'post' || action.method === 'put') {
                 response = appendData(action, route, response, state)
             }
