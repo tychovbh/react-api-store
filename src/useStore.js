@@ -28,9 +28,8 @@ function getStateFromRoutes(state, type, single) {
                 data = {data: data.data[0]}
             }
 
-
             if (!data && state.hasOwnProperty(name)) {
-                continue;
+                continue
             }
             data = route.options.wrap ? {data} : data
         }
@@ -110,6 +109,7 @@ function wrapperDispatch(dispatch, state) {
         }
 
         const route = globalStore.router.route(action.method, action.route)
+        const update = action.update !== false
 
         dispatch({
             update: {
@@ -117,7 +117,7 @@ function wrapperDispatch(dispatch, state) {
             }
         })
 
-        globalStore.dispatch(action).then((response) => {
+        return globalStore.dispatch(action).then((response) => {
             if (action.type === 'append' || action.method === 'post' || action.method === 'put') {
                 response = appendData(action, route, response, state)
             }
@@ -128,16 +128,20 @@ function wrapperDispatch(dispatch, state) {
 
             response = route.options.wrap ? {data: response} : response
 
-            dispatch({
-                update: {
-                    [action.route]: {
-                        ...state[action.route],
-                        loading: false,
-                        updated: true,
-                        ...response
+            if (update) {
+                dispatch({
+                    update: {
+                        [action.route]: {
+                            ...state[action.route],
+                            loading: false,
+                            updated: true,
+                            ...response
+                        }
                     }
-                }
-            })
+                })
+            }
+
+            return response
         })
     }
 }
