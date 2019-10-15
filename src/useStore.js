@@ -117,7 +117,7 @@ function wrapperDispatch(dispatch, state) {
             }
         })
 
-        globalStore.dispatch(action).then((response) => {
+        return globalStore.dispatch(action).then((response) => {
             if (action.type === 'append' || action.method === 'post' || action.method === 'put') {
                 response = appendData(action, route, response, state)
             }
@@ -153,8 +153,16 @@ export function withApiStore(store) {
         }
 
         ApiStoreMiddleware.getInitialProps = async ({Component, ctx}) => {
-            store = globalStore && globalStore.data ? new createStore(globalStore) : store
             let pageProps = {}
+            if (ctx.req) {
+                pageProps.query = ctx.req.query
+                globalStore = {}
+                store.data = {}
+            }
+            if (!ctx.res) {
+                store = globalStore && globalStore.data ? new createStore(globalStore) : store
+            }
+
             if (Component.getInitialProps) {
                 ctx.store = store
                 pageProps = await Component.getInitialProps(ctx)

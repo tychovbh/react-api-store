@@ -23,7 +23,7 @@ export default class Router {
 
     setRoute(type, url, name, options = {}) {
         this.routes[type][name] = {
-            url: this.fullUrl(url),
+            url: options.base_url === false ? url : this.fullUrl(url),
             options: options
         }
     }

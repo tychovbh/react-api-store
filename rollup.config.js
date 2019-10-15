@@ -9,37 +9,38 @@ import svgr from '@svgr/rollup'
 import pkg from './package.json'
 
 export default {
-  input: 'src/index.js',
-  output: [
-    {
-      file: pkg.main,
-      format: 'cjs',
-      sourcemap: true
-    },
-    {
-      file: pkg.module,
-      format: 'es',
-      sourcemap: true
-    }
-  ],
-  loaders: [
-    {test: /\.json$/, loader: 'json-loader'}
-  ],
-  external: [
-    'node-fetch'
-  ],
-  plugins: [
-    external(),
-    postcss({
-      modules: true
-    }),
-    url(),
-    svgr(),
-    babel({
-      exclude: 'node_modules/**',
-      plugins: [ 'external-helpers' ]
-    }),
-    resolve(),
-    commonjs()
-  ]
+    input: 'src/index.js',
+    output: [
+        {
+            file: pkg.main,
+            format: 'cjs',
+            sourcemap: true
+        },
+        {
+            file: pkg.module,
+            format: 'es',
+            sourcemap: true
+        }
+    ],
+    loaders: [
+        {test: /\.json$/, loader: 'json-loader'}
+    ],
+    external: [
+        'node-fetch'
+    ],
+    plugins: [
+        external(),
+        postcss({
+            modules: true
+        }),
+        url(),
+        svgr(),
+        babel({
+            exclude: 'node_modules/**',
+            plugins: ['external-helpers', 'transform-runtime'],
+            runtimeHelpers: true
+        }),
+        resolve(),
+        commonjs()
+    ]
 }
