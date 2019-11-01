@@ -17,15 +17,25 @@ export const request = (type, route, filters = {}) => {
     return type === 'get' ? route + query(params) : route
 }
 
-// TODO JSON stringify arrays JSON.stringify(params[i]   )
-export const form = (params) => {
-    let formData = new FormData()
-
+export const createForm = (formData, params, key = null) => {
     for (let i in params) {
-        if (params.hasOwnProperty(i)) {
-            formData.append(i, params[i])
+        if (!params.hasOwnProperty(i)) {
+            continue
         }
+
+        if ((Array.isArray(params[i]) || typeof params[i] === 'object') && !(params[i] instanceof File)) {
+            formData = whatever(formData, params[i], i)
+            continue;
+        }
+
+        formData.append(key ? key + `[${i}]` : i, params[i])
     }
 
     return formData
 }
+
+export const form = (params) => {
+    let formData = new FormData()
+    return createForm(formData, params)
+}
+
