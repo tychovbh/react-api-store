@@ -24,7 +24,7 @@ export const createForm = (formData, params, key = null) => {
         }
 
         if ((Array.isArray(params[i]) || typeof params[i] === 'object') && !(params[i] instanceof File)) {
-            formData = whatever(formData, params[i], i)
+            formData = createForm(formData, params[i], i)
             continue;
         }
 
