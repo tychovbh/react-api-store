@@ -52,7 +52,7 @@ const Todos = () => {
               dispatch({
                   method: todo.id ? 'put' : 'post',
                   route: 'todos',
-                  params: {...todo, apples: [1, 2, 3], person: {halo: 'halo', doei: 'doei', peren: [1, 2, 3], banaan: {name: 'tycho'}}}
+                  params: todo
               })
           }}>
               <div>
@@ -64,12 +64,6 @@ const Todos = () => {
                     id={'title'}
                     onChange={(value) => setTodo({...todo, title: value.target.value})}
                     value={todo.title}/>
-                  <input type="file" onChange={(event) => {
-                      let files = todo.file
-                      console.log(files)
-                      files.push(event.target.files[0])
-                      setTodo({...todo, file: files})
-                  }}/>
               </div>
 
               <div>

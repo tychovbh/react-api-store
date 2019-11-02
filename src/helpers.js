@@ -23,12 +23,14 @@ export const createForm = (formData, params, key = null) => {
             continue
         }
 
+        let formKey = key ? key + `[${i}]` : i
+
         if ((Array.isArray(params[i]) || typeof params[i] === 'object') && !(params[i] instanceof File)) {
-            formData = createForm(formData, params[i], i)
+            formData = createForm(formData, params[i], formKey)
             continue;
         }
 
-        formData.append(key ? key + `[${i}]` : i, params[i])
+        formData.append(formKey, params[i])
     }
 
     return formData
