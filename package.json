@@ -1,6 +1,6 @@
 {
   "name": "react-hook-api-store",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "React store that is linked with a REST API via Hooks",
   "author": "tychovbh",
   "license": "MIT",

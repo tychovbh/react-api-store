@@ -30,7 +30,8 @@ export const createForm = (formData, params, key = null) => {
             continue;
         }
 
-        formData.append(formKey, params[i])
+        // Return null values as empty string, because the back-end will receive a string "null" which is super annoying.
+        formData.append(formKey, params[i] === null ? '' : params[i])
     }
 
     return formData
