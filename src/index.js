@@ -96,6 +96,7 @@ function deleteData(action, route, state) {
 
 function wrapperDispatch(dispatch, state) {
     return function (action) {
+        const state_key = action.state || action.route
         // Rebuild store because we lose the instance going from server to client
         globalStore = new createStore(globalStore)
         if (action.method === 'setState') {
@@ -127,8 +128,8 @@ function wrapperDispatch(dispatch, state) {
             if (update) {
                 dispatch({
                     update: {
-                        [action.route]: {
-                            ...state[action.route],
+                        [state_key]: {
+                            ...state[state_key],
                             loading: false,
                             updated: true,
                             ...response,
