@@ -7,6 +7,7 @@ store.router.show('/todos/{id}', 'todo', {wrap: true})
 store.router.post('/todos', 'todos', {wrap: true})
 store.router.put('/todos/{id}', 'todos', {wrap: true})
 store.router.delete('/todos/{id}', 'todos', {wrap: true})
+
 store.setState('user', {})
 
 const Todos = () => {

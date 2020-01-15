@@ -17,6 +17,7 @@ export const request = (type, route, filters = {}) => {
     return type === 'get' ? route + query(params) : route
 }
 
+// TODO create JS array expansion from this method
 export const createForm = (formData, params, key = null) => {
     for (let i in params) {
         if (!params.hasOwnProperty(i)) {
@@ -25,9 +26,13 @@ export const createForm = (formData, params, key = null) => {
 
         let formKey = key ? key + `[${i}]` : i
 
-        if ((Array.isArray(params[i]) || typeof params[i] === 'object') && !(params[i] instanceof File)) {
+        if (
+          params[i] !== null &&
+          (Array.isArray(params[i]) || typeof params[i] === 'object') &&
+          !(params[i] instanceof File) && !(params[i] instanceof Date)
+        ) {
             formData = createForm(formData, params[i], formKey)
-            continue;
+            continue
         }
 
         // Return null values as empty string, because the back-end will receive a string "null" which is super annoying.
