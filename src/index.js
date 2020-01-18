@@ -125,18 +125,20 @@ function wrapperDispatch(dispatch, state) {
                 response = deleteData(action, route, state)
             }
 
-            if (update) {
-                dispatch({
-                    update: {
-                        [state_key]: {
-                            ...state[state_key],
-                            loading: false,
-                            updated: true,
-                            ...response,
-                        },
-                    },
-                })
+            let updatedState = {
+                ...state[state_key],
+                loading: false,
             }
+
+            if (update) {
+                updatedState = {...updatedState, updated: true, ...response}
+            }
+
+            dispatch({
+                update: {
+                    [state_key]: updatedState,
+                },
+            })
 
             return response
         })
@@ -207,7 +209,7 @@ class createStore {
         }
 
         if (route.options.wrap) {
-            data = {[append] : data}
+            data = {[append]: data}
         }
 
         if (refresh) {
