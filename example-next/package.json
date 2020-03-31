@@ -6,7 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^9.0.2",
+    "next": "^9.3.2",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-hook-api-store": "link:.."
