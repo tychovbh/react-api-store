@@ -100,9 +100,11 @@ function wrapperDispatch(dispatch, state) {
         // Rebuild store because we lose the instance going from server to client
         globalStore = new createStore(globalStore)
         if (action.method === 'setState') {
+            const append = action.append || 'data'
+
             return dispatch({
                 update: {
-                    [action.name]: action.value,
+                    [action.name]: {...state[action.name], [append]: action.value},
                 },
             })
         }
@@ -110,14 +112,17 @@ function wrapperDispatch(dispatch, state) {
         const route = globalStore.router.route(action.method, action.route)
         const update = action.update !== false
 
-        dispatch({
-            update: {
-                [action.route]: {...state[action.route], loading: true},
-            },
-        })
+        if (update) {
+            dispatch({
+                update: {
+                    [action.route]: {...state[action.route], loading: true},
+                },
+            })
+        }
 
         return globalStore.dispatch(action, false).then((response) => {
             if (action.type === 'append' || action.method === 'post' || action.method === 'put') {
+                // TODO make prepend
                 response = appendData(action, route, response, state)
             }
 
@@ -132,13 +137,12 @@ function wrapperDispatch(dispatch, state) {
 
             if (update) {
                 updatedState = {...updatedState, updated: true, ...response}
+                dispatch({
+                    update: {
+                        [state_key]: updatedState,
+                    },
+                })
             }
-
-            dispatch({
-                update: {
-                    [state_key]: updatedState,
-                },
-            })
 
             return response
         })
