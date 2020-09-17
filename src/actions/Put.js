@@ -10,7 +10,8 @@ async function put(request, params, headers = {}) {
         headers: headers
     })
 
-    return await res.json()
+    const json = await res.json()
+    return res.ok ? json : {errors: json}
 }
 
 export default {
