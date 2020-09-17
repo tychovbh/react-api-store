@@ -26,7 +26,7 @@ function getStateFromRoutes(state, type, single) {
 
         state[name] = {
             ...data,
-            errors: [],
+            errors: {},
             loading: false,
             updated: false,
         }
@@ -135,6 +135,10 @@ function wrapperDispatch(dispatch, state) {
                 loading: false,
             }
 
+            if (!response.errors) {
+                updatedState.errors = {}
+            }
+
             if (update) {
                 updatedState = {...updatedState, updated: true, ...response}
                 dispatch({
@@ -199,7 +203,7 @@ class createStore {
     async dispatch(action, refreshable = true) {
         refresh = refreshable
         const method = this.actions[action.method]
-        let data = await method(this.router.request(action.method, action.route, action.params), action.params, action.headers)
+        let data = await method(this.router.request(action.method, action.route, action.params), action.params, action.headers, action.defaults)
 
         // Todo rewrite this to something pretty
         const route = this.router.routes[action.method][action.route]

@@ -22,7 +22,7 @@ const Todos = () => {
     useEffect(() => {
         dispatch({
             method: 'index',
-            route: 'todos'
+            route: 'todos',
         })
 
         dispatch({
