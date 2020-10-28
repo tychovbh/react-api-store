@@ -10,6 +10,8 @@ store.router.delete('/todos/{id}', 'todos', {wrap: true})
 
 store.setState('user', {})
 
+store.router.post('/todos', 'todo', {wrap: true, single: true})
+
 const Todos = () => {
     const {state, dispatch} = useApiStore()
     const [todo, setTodo] = useState({
@@ -42,6 +44,7 @@ const Todos = () => {
         })
     }, [])
 
+    console.log(state.todo)
     return (
       <div>
           <p><strong>Todo with ID 1: {state.todo.data.title}</strong></p>
@@ -52,7 +55,7 @@ const Todos = () => {
               event.preventDefault()
               dispatch({
                   method: todo.id ? 'put' : 'post',
-                  route: 'todos',
+                  route: 'todo',
                   params: todo
               })
           }}>

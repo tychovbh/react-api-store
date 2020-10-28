@@ -121,6 +121,7 @@ function wrapperDispatch(dispatch, state) {
         }
 
         return globalStore.dispatch(action, false).then((response) => {
+            const rawResponse = response
             if (action.type === 'append' || action.method === 'post' || action.method === 'put') {
                 // TODO make prepend
                 response = appendData(action, route, response, state)
@@ -148,7 +149,7 @@ function wrapperDispatch(dispatch, state) {
                 })
             }
 
-            return response
+            return action.return === 'response' ? rawResponse : response
         })
     }
 }
