@@ -127,7 +127,7 @@ function wrapperDispatch(dispatch, state) {
                 response = appendData(action, route, response, state)
             }
 
-            if (action.method === 'delete') {
+            if (action.method === 'delete' && update) {
                 response = deleteData(action, route, state)
             }
 
